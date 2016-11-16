@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+ <head>
+ 	<meta charset="UTF-8">
+ 	<title>How To 4</title>
+ 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+ </head>
+ <body>
+ 	<div class="container">
+ 		<div class="row">
+ 			<div class="col-9 col-offset-2"> 
+ 			 	<h1>How to: Visualizations using D3.js</h1>
+ 				<h2>Draw a basic pie chart using D3</h2>
+ 				<p>So far we’ve know how to draw basic shapes such as circle, rectangle and ellipse with D3. In this section, we will learn how to use D3 to interpret a section of data and draw a pie chart with it. Before we actually draw the pie chart, let’s first talk about what type of data can D3 interpret.</p>
+ 				<p>The most common structure of data that D3 could understand is array. For example:</p>
+ 				<pre>
+ 					<code>var matrix = [
+ 						[11975,  5871, 8916, 2868],
+ 						[ 1951, 10048, 2060, 6171],
+ 						[ 8010, 16145, 8090, 8045],
+ 						[ 1013,   990,  940, 6907]
+ 					];
+ 					var tr = d3.select("body")
+ 						.append("table")
+ 						.selectAll("tr")
+ 						.data(matrix)
+ 						.enter().append("tr");
+ 					var td = tr.selectAll("td")
+ 						.data(function(d) { return d;)
+ 						.enter().append("td")
+ 						.text(function(d) { return d; });
+ 					</code>
+ 				</pre>
+ 				<p>The API we are going to use is: <code>selection.data([data[, key]])</code></p>
+ 				<p>In this example, we create a matrix with 4 rows and 4 columns. This matrix is represent by an array of 4 subarrays. We also could make an array of objects. For example:</p>
+ 				<pre>
+ 				<code>
+ 				var jsonCircles = [
+ 					{x_axis: 30,
+ 					y_axis: 30,
+ 					radius: 20,
+ 					color : "green"
+ 					}, {
+ 					x_axis: 70,
+ 					y_axis: 70,
+ 					radius: 20,
+ 					color : "purple"
+ 					}, {
+ 					x_axis: 110,
+ 					y_axis: 100,
+ 					radius: 20,
+ 					color : "red"
+ 					}];
+ 				</code>
+ 				</pre>
+ 				<p>This array contains 3 objects which are circles of different positions and colors. Note that the objects could also be JSON objects.</p>
+ 				<p>Now we've understand the data structure of D3. let's move on to talk about how to draw pie charts with an array of objects. First let’s define some data:</p>
+ 				<pre>
+ 				<code>
+ 				var dataset = [
+ 				{ label: 'Foo', count: 10 },
+ 				{ label: 'Bar', count: 20 },
+ 				{ label: 'Baz', count: 30 },
+ 				{ label: 'Boo', count: 40 }
+ 				];
+ 				</code>
+ 				</pre>
+ 				<p>For the color of the pie chart we could use such API: <code>d3.scaleOrdinal(d3.schemeCategory20b)</code>. This contains an array of twenty categorical colors represented as RGB hexadecimal strings. Next we will make a SVG element:</p>
+ 				<pre><code>
+ 				var svg = d3.select('#chart')
+ 					.append('svg')
+ 					.attr('width', width)
+ 					.attr('height', height)
+ 					.append('g')
+ 					.attr('transform', 'translate(' + (width / 2) +  ',' + (height / 2) + ')');
+ 				</code></pre>
+ 				<p>This may look pretty complicated at the first sight. But if you could take a look line by line, you will find the idea is the same as the previous section. This code first uses the “select” method to select where to create the chart. In this example, the we choose to create the chart at the id = chart. Then it uses the append method to put the pie chart to such location. Next, we set the width and height of the SVG container. The “g” element means the container contains a group of SVG elements, and “transform” attribute defines a list of transform definitions that are applied to an element and the element's children. To set the radius of the pie chart, we use the <code>d3.arc()</code> API:</p>
+ 				<pre><code>
+ 				var radius = Math.min(width, height) / 2;
+ 				var arc = d3.arc()
+ 					.innerRadius(0)
+ 					.outerRadius(radius);
+ 				</code></pre>
+ 				<p>The inner radius is set to 0 because all the pies are gathered at one point in the middle of the circle.</p>
+ 				<p>For the angles of each segments, we use <code>d3.pie()</code> API:</p>
+ 				<pre><code>
+ 				var pie = d3.pie()
+ 					.value(function(d) { return d.count; })
+ 					.sort(null);
+ 				</code></pre>
+ 				<p>The function returns each object's count as the angle. Here is our example chart:</p>
+ 				<span id="chart"></span>
+ 				<p>Here is the code for our chart:</p>
+ 				<img src="code.png">
+ 				<p><a href="page4.html">Next page</a></p>
+ 			</div>
+ 		</div>
+ 	</div>
+ 	<script type="text/javascript" src="d3.min.js"></script>
+ 	<script type="text/javascript" src="chart.js"></script>
+ </body>
+</html>

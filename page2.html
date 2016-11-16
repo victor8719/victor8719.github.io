@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+ <head>
+ 	<meta charset="UTF-8">
+ 	<title>How To 3</title>
+ 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+ </head>
+ <body>
+ 	<div class="container">
+ 		<div class="row">
+ 			<div class="col-9 col-offset-2"> 
+ 			 	<h1>How to: Visualizations using D3.js</h1>
+ 				<h2>Draw basic shapes using D3</h2>
+ 				<p>We have gone through how to use D3 to draw a circle. In this section, we will generate several basic shapes using D3. The basic steps to use D3 to draw a shape are:</p>
+ 				<ol>
+ 					<li>Make an SVG container.</li>
+ 					<li>Draw the shape.</li>
+ 				</ol>
+ 				<h3>Rectangle</h3>
+ 				<p>Let's start to draw a rectangle. The code of drawing a rectangle using D3 is: </p>
+ 				<pre>
+ 					<code>
+ 					//Make an SVG Container
+ 					var svgContainer = d3.select("body").append("svg")
+ 						.attr("width", 200)
+ 						.attr("height", 200);
+ 					
+ 					//Draw the Rectangle
+ 					var rectangle = svgContainer.append("rect")
+ 						.attr("x", 10)
+ 						.attr("y", 10)
+ 						.attr("width", 200)
+ 						.attr("height", 100);
+                    </code>
+                </pre>
+            <p>The “x” and “y” attributes define the left and top positions of the rectangle. It is obvious that the “width” and “height” attributes are the width and height of the rectangle.</p>
+            <span id="rectangle"></span>
+            <h3>Ellipse</h3>
+            <p>The code of drawing an ellipse using D3 is: </p>
+            <pre>
+            	<code>
+            			//Make an SVG Container
+				var svgContainer = d3.select("body").append("svg")
+					.attr("width", 200)
+					.attr("height", 200);
+				//Draw the Ellipse
+				var circle = svgContainer.append("ellipse")
+					.attr("cx", 100)
+					.attr("cy", 100)
+					.attr("rx", 100)
+					.attr("ry", 50);
+            	</code>
+            </pre>
+            <p>The “x” and “y” attributes define the coordinate of the center point of the ellipse. The "rx" attribute defines the horizontal radius. The "ry" attribute defines the vertical radius</p>
+            <span id="ellipse"></span>
+
+            <h3>Straight Line</h3>
+            <p>The code of drawing a straight line using D3 is: </p>
+            <pre>
+            	<code>
+            			//Make an SVG Container
+				var svgContainer = d3.select("body").append("svg")
+					.attr("width", 200)
+					.attr("height", 200);
+				//Draw the Ellipse
+				var circle = svgContainer.append("line")
+					.attr("x1", 10)
+					.attr("y1", 10)
+					.attr("x2", 150)
+					.attr("y2", 150);
+            	</code>
+            </pre>
+            <p>The “x1” and “y1” attributes define the coordinate of start point of the straight line. The “x2” and “y2” attributes define the coordinate of end point of the straight line.</p>
+            <span id="line"></span>
+            <p><a href="page3.html">Next page</a></p>
+ 			</div>
+ 		</div>
+ 	</div>
+ 	<script type="text/javascript" src="d3.min.js"></script>
+ 	<script type="text/javascript" src="shapes.js"></script>
+ </body>
+</html>
